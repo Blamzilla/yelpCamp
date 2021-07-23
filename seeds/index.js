@@ -14,9 +14,8 @@ db.once("open", () => {
   console.log("Database connected");
 });
 
-
-const seedDB = asyn () => {
-    await Campground.deleteMany({})
-    const c = new Campground({title: 'purp field'})
-    await c.save();
-}
+const seedDB = async () => {
+  await Campground.deleteMany({});
+  const c = new Campground({ title: "purp field" });
+  await c.save();
+};
