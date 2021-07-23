@@ -9,7 +9,7 @@ const app = express();
 
 //middleware section
 app.use(methodOverride("_method"));
-app.set("views engine", "ejs");
+app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 
