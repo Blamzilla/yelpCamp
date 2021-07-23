@@ -42,7 +42,8 @@ app.get("/campgrounds/new", (req, res) => {
   res.render("campgrounds/new");
 });
 app.post("/campgrounds", async (req, res) => {
-  const newCamp = new Campground.create(req.body);
+  const { location, title } = req.body;
+  const newCamp = new Campground.create(this.location, this.title);
 
   newCamp
     .save()
