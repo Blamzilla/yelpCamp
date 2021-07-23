@@ -1,9 +1,20 @@
+//includes section
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
+const uuid = require("uuid");
+const methodOverride = require("method-override");
+
 const app = express();
 
+//middleware section
+app.use(methodOverride("_method"));
+app.set("views engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(express.urlencoded({ extended: true }));
+
 app.get("/", (req, res) => {
-  res.send("root");
+  res.render("home");
 });
 
 app.listen(3000, () => {
