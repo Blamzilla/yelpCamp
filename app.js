@@ -8,6 +8,7 @@ const Campground = require("./models/campground");
 const app = express();
 
 //DB connection section
+//testing output
 mongoose.connect("mongodb://localhost:27017/yelp-camp", {
   useNewUrlParser: true,
   useCreateIndex: true,
