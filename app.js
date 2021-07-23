@@ -43,8 +43,8 @@ app.get("/campgrounds/new", (req, res) => {
 });
 app.post("/campgrounds", async (req, res) => {
   const newCamp = new Campground(req.body.campground);
-
-  await newCamp.save();
+  console.log(req.body);
+  //await newCamp.save();
   res.redirect("/campgrounds");
 });
 app.get("/campgrounds/:id", async (req, res) => {
