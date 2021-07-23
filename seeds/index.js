@@ -20,4 +20,4 @@ const seedDB = async () => {
   await c.save();
 };
 
-seedDb();
+seedDB();
