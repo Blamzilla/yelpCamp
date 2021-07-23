@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const path = require("path");
 const uuid = require("uuid");
 const methodOverride = require("method-override");
+const Campground = require("./models/campground");
+const app = express();
 
 //DB connection section
 mongoose.connect("mongodb://localhost:27017/yelp-camp", {
@@ -18,16 +20,22 @@ db.once("open", () => {
   console.log("Database connected");
 });
 
-const app = express();
-
 //middleware section
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 
+//routes
+
 app.get("/", (req, res) => {
   res.render("home");
+});
+
+app.get("/makecampground", async (req, res) => {
+  const camp = new Campground({ title: "My backyard" });
+  await camp.save();
+  res.send(camp);
 });
 
 app.listen(3000, () => {
