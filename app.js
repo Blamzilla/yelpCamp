@@ -50,7 +50,12 @@ app.get("/campgrounds/new", async (req, res) => {
 
 app.post("/campgrounds/new", async (req, res) => {
   const { title, description, price, location } = req.body;
-  const newCamp = new Campground.create(req.body);
+  const newCamp = new Campground.create({
+    title,
+    description,
+    price,
+    location,
+  });
 
   newCamp.save();
 });
