@@ -43,9 +43,9 @@ app.get("/campgrounds/new", (req, res) => {
 });
 app.post("/campgrounds", async (req, res) => {
   const { location, title } = req.body;
-  const newCamp = new Campground.create(this.location, this.title);
+  const newCamp = new Campground({ location, title });
 
-  newCamp
+  await newCamp
     .save()
     .then((m) => console.log(m))
     .catch((e) => console.log("I didnt run ", e));
