@@ -48,12 +48,12 @@ app.get("/campgrounds/new", async (req, res) => {
   res.render("campgrounds/new");
 });
 
-app.post("/campgrounds/new", async (req, res) => {
-  const { title, description, price, location } = req.body;
-  const newCamp = new Campground.create(title, description, price, location);
+// app.post("/campgrounds/new", async (req, res) => {
+//   const { title, description, price, location } = req.body;
+//   const newCamp = new Campground.create(title, description, price, location);
 
-  newCamp.save();
-});
+//   newCamp.save();
+// });
 
 app.listen(3000, () => {
   console.log("listening on 3000");
