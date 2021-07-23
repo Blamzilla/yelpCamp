@@ -1,6 +1,7 @@
 //includes section
 const express = require("express");
 const mongoose = require("mongoose");
+const ejsMate = require("ejs-mate");
 const path = require("path");
 const uuid = require("uuid");
 const methodOverride = require("method-override");
@@ -22,6 +23,7 @@ db.once("open", () => {
 });
 
 //middleware section
+app.engine("ejs", ejsMate);
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
