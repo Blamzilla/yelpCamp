@@ -48,6 +48,19 @@ app.post("/campgrounds", async (req, res) => {
   console.log(newCamp);
   res.redirect(`/campgrounds/${newCamp._id}`);
 });
+
+app.get("/campgrounds/:id/edit", async (req, res) => {
+  const { id } = req.params;
+  const campground = await Campground.findById(id);
+  res.render("campgrounds/edit", { campground });
+});
+app.put("/campgrounds/:id", async (req, res) => {
+  const { id, title, location } = req.body.campground;
+  const findCamp = Campground.findByIdAndUpdate(id, {
+    $set: { title, location },
+  });
+  res.redirect(`/campgrounds/${id}`);
+});
 app.get("/campgrounds/:id", async (req, res) => {
   const { id } = req.params;
   const campground = await Campground.findById(id);
