@@ -44,7 +44,7 @@ app.get("/campgrounds/:id", async (req, res) => {
   res.render("campgrounds/show", { campground });
 });
 
-app.get("/campgrounds/new", async (req, res) => {
+app.get("/campgrounds/new", (req, res) => {
   res.render("campgrounds/new");
 });
 
