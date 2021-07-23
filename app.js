@@ -44,6 +44,15 @@ app.get("/campgrounds/:id", async (req, res) => {
   res.render("campgrounds/show", { campground });
 });
 
+app.get("/campgrounds/new", async (req, res) => {
+  res.render("/campgrounds/new");
+});
+
+app.post("/campgrounds/new", async (req, res) => {
+  const newCamp = await Campground.create(req.body);
+  newCamp.save();
+});
+
 app.listen(3000, () => {
   console.log("listening on 3000");
 });
