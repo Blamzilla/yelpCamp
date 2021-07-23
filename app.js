@@ -38,14 +38,18 @@ app.get("/campgrounds", async (req, res) => {
   res.render("campgrounds/index", { campgrounds });
 });
 
+app.get("/campgrounds/new", (req, res) => {
+  res.render("campgrounds/new");
+});
+app.post("/campgrounds/new", async (req, res) => {
+  const newCamp = new Campground.create(req.body);
+
+  await newCamp.save();
+});
 app.get("/campgrounds/:id", async (req, res) => {
   const { id } = req.params;
   const campground = await Campground.findById(id);
   res.render("campgrounds/show", { campground });
-});
-
-app.get("/campgrounds/newcamp", async (req, res) => {
-  res.render("campgrounds/newcamp");
 });
 
 // app.post("/campgrounds/new", async (req, res) => {
