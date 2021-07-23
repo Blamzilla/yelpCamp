@@ -45,10 +45,8 @@ app.post("/campgrounds", async (req, res) => {
   const { location, title } = req.body;
   const newCamp = new Campground({ location, title });
 
-  await newCamp
-    .save()
-    .then((m) => console.log(m))
-    .catch((e) => console.log("I didnt run ", e));
+  await newCamp.save();
+  res.redirect("/campgrounds");
 });
 app.get("/campgrounds/:id", async (req, res) => {
   const { id } = req.params;
