@@ -1,28 +1,73 @@
 <% layout('./layouts/boilerplate')%>
-<form action="/campgrounds/<%=campground.id%>?_method=PUT" method="POST">
-  <!-- <input
+
+<div class="row">
+    <div class="h1 text-center">
+    Edit Campground Information
+</div>
+  <form action="/campgrounds/<%=campground.id%>?_method=PUT" method="POST">
+    <!-- <input
         type="hidden"
         name="campground[id]"
         id="id"
         value="<%=campground.id%>"
       /> -->
-  <div>
-    <label for="title">Title:</label>
-    <input
-      type="text"
-      name="campground[title]"
-      id="title"
-      value="<%=campground.title%>"
-    />
-  </div>
-  <div>
-    <label for="location">location:</label>
-    <input
-      type="text"
-      name="campground[location]"
-      id="location"
-      value="<%=campground.location%>"
-    />
-  </div>
-  <button>Submit</button>
-</form>
+    <div class="col-6 offset-3">
+      <label for="title" class="form-label">Title:</label>
+      <input
+        class="form-control"
+        type="text"
+        name="campground[title]"
+        id="title"
+        value="<%=campground.title%>"
+      />
+    </div>
+    <div class="col-6 offset-3">
+      <label class="form-label" for="location">location:</label>
+      <input
+        class="form-control"
+        type="text"
+        name="campground[location]"
+        id="location"
+        value="<%=campground.location%>"
+      />
+    </div>
+    <div class="col-6 offset-3">
+      <label class="form-label" for="location">Image URL: </label
+      ><input
+        type="text"
+        class="form-control"
+        name="campground[image]"
+        id="image"
+        value="<%= campground.image %> "
+      />
+<div class="mb-3">
+    <label class="form-label" for="price">Price: </label>
+      <div class="input-group">
+        <span class="input-group-text" id="basic-addon1">$</span>
+        <input
+          type="text"
+          class="form-control"
+          name="campground[price]"
+          id="price"
+          value="<%= campground.price %> "
+        />
+        <span class="input-group-text">.00</span>
+      </div>
+</div>
+      <div class="mb-3">
+        <label class="form-label" for="location">Description: </label
+        ><textarea
+          type="text"
+          class="form-control"
+          name="campground[description]"
+          id="description"
+          
+        ><%=campground.description %></textarea>
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-info text-white">Update Campground</button>
+      </div>
+        </form>
+    </div>
+
+</div>

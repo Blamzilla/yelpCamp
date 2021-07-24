@@ -1,8 +1,62 @@
 <% layout('./layouts/boilerplate')%>
-<h1><%=campground.title%></h1>
-<h2><%=campground.location%></h2>
-<a href="/campgrounds">Home</a> -
-<a href="/campgrounds/<%=campground._id%>/edit"> Edit</a>
-<form action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
-  <button>Delete item</button>
-</form>
+<div class="row">
+  <div class="col-md-6 offset-3">
+    <div class="card">
+      <img src="<%=campground.image %> " class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title"><%=campground.title %></h5>
+        <p class="card-text"><%=campground.description %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Price $<%= campground.price %>/day</li>
+        <li class="list-group-item text-muted"><%=campground.location %></li>
+      </ul>
+      <div class="card-body">
+        <div class=""></div>
+        <a
+          href="/campgrounds/<%=campground._id%>/edit"
+          class="btn btn-warning card-link"
+        >
+          Edit</a
+        >
+        <form
+          class="d-inline"
+          action="/campgrounds/<%=campground._id%>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-danger">Delete item</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="row">
+    <div class="col-md-6 offset-3">
+      <img class="img-fluid rounded" src="<%=campground.image%>" alt="" />
+    </div>
+    <div class="col-md-6 offset-3">
+      <h1 class="h1"><%=campground.title%></h1>
+    </div>
+    <div class="col-md-6 offset-3">
+      <h2 class="h2"><%=campground.location%></h2>
+    </div>
+
+    <p><%=campground.description%></p>
+    <br />
+
+    <div class="btn-group pagination-center">
+      <div class="mx-3">
+        <a href="/campgrounds/<%=campground._id%>/edit" class="btn btn-warning">
+          Edit</a
+        >
+</div>
+        <form
+          action="/campgrounds/<%=campground._id%>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-danger">Delete item</button>
+        </form>
+      </div>
+    </div>
+  </div> -->
+</div>
