@@ -4,13 +4,8 @@
     <div class="h1 text-center">
     Edit Campground Information
 </div>
-  <form action="/campgrounds/<%=campground.id%>?_method=PUT" method="POST">
-    <!-- <input
-        type="hidden"
-        name="campground[id]"
-        id="id"
-        value="<%=campground.id%>"
-      /> -->
+  <form action="/campgrounds/<%=campground.id%>?_method=PUT" method="POST" class="validated-form" novalidate>
+
     <div class="col-6 offset-3">
       <label for="title" class="form-label">Title:</label>
       <input
@@ -19,7 +14,10 @@
         name="campground[title]"
         id="title"
         value="<%=campground.title%>"
+        required
       />
+          <div class="invalid-feedback">Please enter a title</div>
+        <div class="valid-feedback">Looks good</div>
     </div>
     <div class="col-6 offset-3">
       <label class="form-label" for="location">location:</label>
@@ -29,7 +27,10 @@
         name="campground[location]"
         id="location"
         value="<%=campground.location%>"
+        required
       />
+              <div class="invalid-feedback">Please enter a location</div>
+        <div class="valid-feedback">Looks good</div>
     </div>
     <div class="col-6 offset-3">
       <label class="form-label" for="location">Image URL: </label
@@ -39,7 +40,10 @@
         name="campground[image]"
         id="image"
         value="<%= campground.image %> "
+        required
       />
+             <div class="invalid-feedback">Please enter a valid URL</div>
+        <div class="valid-feedback">Looks good</div>
 <div class="mb-3">
     <label class="form-label" for="price">Price: </label>
       <div class="input-group">
@@ -50,19 +54,24 @@
           name="campground[price]"
           id="price"
           value="<%= campground.price %> "
+          required
         />
         <span class="input-group-text">.00</span>
+                  <div class="invalid-feedback">Please enter a price</div>
+          <div class="valid-feedback">Looks good</div>
       </div>
 </div>
       <div class="mb-3">
-        <label class="form-label" for="location">Description: </label
+        <label class="form-label" for="description">Description: </label
         ><textarea
           type="text"
           class="form-control"
           name="campground[description]"
           id="description"
-          
+          required
         ><%=campground.description %></textarea>
+                <div class="invalid-feedback">Please enter a description</div>
+        <div class="valid-feedback">Looks good</div>
       </div>
       <div class="mb-3">
         <button class="btn btn-info text-white">Update Campground</button>
@@ -71,3 +80,4 @@
     </div>
 
 </div>
+<%- include("../../assets/js/formValidator.js")%>
