@@ -26,7 +26,7 @@ db.once("open", () => {
   console.log("Database connected");
 });
 
-//middleware section
+//middleware section dvfs
 app.engine("ejs", ejsMate);
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
