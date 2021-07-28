@@ -1,14 +1,39 @@
 <% layout('./layouts/boilerplate')%>
+<link rel="stylesheet" href="/css/stars.css">
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-4">
       <%- include('../partial/flash')%>
+
+
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+        <% campground.images.forEach((img, i) =>{ %>
+          <% console.log(i) %>
+    <div class="carousel-item <%= i === 0 ? 'active' : ''%>">
+      <img class="d-block w-100" src="<%= img.url %> " alt="">
+    </div>
+      <% }) %>
+    
+  </div>
+  <% if (campground.images.length > 1) { %> 
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+  <% } %> 
+</div>
+
+
       <div class="card">
-        <img
-          src="<%=campground.image %> "
-          class="card-img-top img-responsive"
-          alt="..."
-        />
+        
+       
+       
         <div class="card-body">
           <h5 class="card-title"><%=campground.title %></h5>
           <p class="card-text"><%=campground.description %></p>
@@ -50,7 +75,8 @@
         novalidate
       >
         <div class="mb-3">
-          <label for="rating">Rating</label>
+          <%- include('../partial/starrating') %> 
+          <!-- <label for="rating">Rating</label>
           <input
             class="form-range"
             type="range"
@@ -58,7 +84,7 @@
             min="1"
             max="5"
             id="rating"
-          />
+          /> -->
         </div>
         <div class="mb-3">
           <label class="form-label" for="body">Review</label>
@@ -76,10 +102,14 @@
       <% } %> <% for(let review of campground.reviews){ %>
       <div class="mb-3 card">
         <div class="card-body">
-          <h5 class="card-title"><%=review.rating%></h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-            By: <%= review.author.username %>
-          </h6>
+          
+            <h5 class="card-title"><%= review.author.username %></h5>
+              
+  <p class="starability-result" data-rating="<%=review.rating%>">
+    Rated: <%=review.rating%>
+  </p>
+            
+        
           <p class="card-text"><%=review.body%></p>
           <% if( currentUser && review.author.equals(currentUser)) {%>
           <form
