@@ -1,0 +1,47 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container col-6 col-md-4">
+  <%- include('../partial/flash')%>
+  <h1>Register</h1>
+  <div class="row">
+    <form action="/register" class="validated-form" method="POST" novalidate>
+      <div class="mb-3">
+        <label class="form-label" for="username">Username </label
+        ><input
+          type="text"
+          class="form-control"
+          name="username"
+          id="username"
+          required
+        />
+        <div class="invalid-feedback">Please enter a username</div>
+        <div class="valid-feedback">Looks good</div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="username">Email </label
+        ><input
+          type="email"
+          class="form-control"
+          name="email"
+          id="email"
+          required
+        />
+        <div class="invalid-feedback">Please enter an email</div>
+        <div class="valid-feedback">Looks good</div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="password">Password </label
+        ><input
+          type="password"
+          class="form-control"
+          name="password"
+          id="password"
+          required
+        />
+        <div class="invalid-feedback">Please enter a username</div>
+        <div class="valid-feedback">Looks good</div>
+      </div>
+      <button class="btn btn-primary">Register</button>
+    </form>
+  </div>
+</div>

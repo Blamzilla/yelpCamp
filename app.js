@@ -9,12 +9,16 @@ const Campground = require("./models/campground");
 const app = express();
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalPassport = require("passport-local");
+const User = require("./models/user");
 
 const ObjectID = require("mongodb").ObjectID;
 const ExpressError = require("./utils/ExpressError");
 
-const campgrounds = require("./routes/campgrounds");
-const reviews = require("./routes/reviews");
+const userRoutes = require("./routes/users");
+const campgroundRoutes = require("./routes/campgrounds");
+const reviewRoutes = require("./routes/reviews");
 
 const { campgroundSchema, reviewSchema } = require("./schemas.js");
 //DB connection section
@@ -32,6 +36,7 @@ db.once("open", () => {
 });
 
 //middleware section
+
 app.engine("ejs", ejsMate);
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
@@ -52,7 +57,15 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalPassport(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
 
@@ -60,10 +73,13 @@ app.use((req, res, next) => {
 });
 
 //Campground Routes ewrgfeg
-app.use("/campgrounds", campgrounds);
+app.use("/campgrounds", campgroundRoutes);
 
 //Review routes
-app.use("/campgrounds/:id/review", reviews);
+app.use("/campgrounds/:id/review", reviewRoutes);
+
+//User routes
+app.use("/", userRoutes);
 
 app.get("/", (req, res) => {
   res.redirect("/campgrounds");

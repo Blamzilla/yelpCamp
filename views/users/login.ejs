@@ -1,0 +1,36 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container col-6 col-md-4">
+  <%- include('../partial/flash')%>
+  <h1>Login</h1>
+  <div class="row">
+    <form action="/login" class="validated-form" method="POST" novalidate>
+      <div class="mb-3">
+        <label class="form-label" for="username">Username </label
+        ><input
+          type="text"
+          class="form-control"
+          name="username"
+          id="username"
+          required
+        />
+        <div class="invalid-feedback">Please enter a username</div>
+        <div class="valid-feedback">Looks good</div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="password">Password </label
+        ><input
+          type="password"
+          class="form-control"
+          name="password"
+          id="password"
+          required
+        />
+        <div class="invalid-feedback">Please enter a password</div>
+        <div class="valid-feedback">Looks good</div>
+      </div>
+      <button class="btn btn-primary">Login</button>
+    </form>
+  </div>
+</div>
