@@ -91,7 +91,9 @@ app.get("/", (req, res) => {
 });
 
 app.all("*", (req, res, next) => {
-  next(new ExpressError("Page not found"), 404);
+  req.flash('error', "Page not found")
+ return res.redirect('/campgrounds')
+  
 });
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
