@@ -42,7 +42,8 @@ module.exports.editCamp = async (req, res, next) => {
   const { id } = req.params;
 
     if (!ObjectID.isValid(id)) {
-      return next();
+      req.flash('error', "Campground not found") 
+      return res.redirect('/campgrounds')
     }
     
     const campground = await Campground.findByIdAndUpdate(id, {...req.body.campground});
@@ -72,8 +73,10 @@ module.exports.editCamp = async (req, res, next) => {
 
   module.exports.viewCamp = async (req, res, next) => {
     const { id } = req.params;
+   
     if (!ObjectID.isValid(id)) {
-      return next();
+       req.flash("error", "Campground not found");
+    return res.redirect(`/campgrounds`);
     }
     const campground = await await Campground.findById(id)
       .populate({ path: "reviews", populate: { path: "author" } })

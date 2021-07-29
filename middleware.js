@@ -3,6 +3,7 @@ const { campgroundSchema, reviewSchema } = require("./schemas.js");
 const ExpressError = require("./utils/ExpressError");
 const Review = require("./models/review");
 const catchAsync = require("./utils/catchAsync");
+const ObjectID = require("mongodb").ObjectID;
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
@@ -13,15 +14,21 @@ module.exports.isLoggedIn = (req, res, next) => {
   next();
 };
 
-module.exports.isAuthor = catchAsync(async (req, res, next) => {
-  const { id } = req.params;
+module.exports.isAuthor = async (req, res, next) => {
+  try{const { id } = req.params;
+
+  if (!ObjectID.isValid(id)) {
+    
+      return next()
+      
+    }
   const findCampground = await Campground.findById(id);
   if (!findCampground.author.equals(req.user._id)) {
     req.flash("error", "You do not have permission to do that");
     return res.redirect(`/campgrounds/${id}`);
   }
-  next();
-});
+  next();}catch(err){return next()}
+};
 
 module.exports.isReviewAuthor = async (req, res, next) => {
   const { id, reviewId } = req.params;
