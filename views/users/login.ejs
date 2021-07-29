@@ -1,9 +1,15 @@
 <% layout('layouts/boilerplate')%>
 
-<div class="container col-6 col-md-4">
+<div class="container col-6 ">
   <%- include('../partial/flash')%>
-  <h1>Login</h1>
+  
   <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card shadow">
+        <img src="https://images.unsplash.com/photo-1556213865-7d7377053e1f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1055&q=80" alt="" class="card-img-top">
+        <div class="card-body">
+          
+          <h5 class="">Login</h5>
     <form action="/login" class="validated-form" method="POST" novalidate>
       <div class="mb-3">
         <label class="form-label" for="username">Username </label
@@ -12,6 +18,7 @@
           class="form-control"
           name="username"
           id="username"
+          autofocus
           required
         />
         <div class="invalid-feedback">Please enter a username</div>
@@ -30,7 +37,11 @@
         <div class="invalid-feedback">Please enter a password</div>
         <div class="valid-feedback">Looks good</div>
       </div>
-      <button class="btn btn-primary">Login</button>
+      <div class="d-grid">
+      <button class="btn btn-primary">Login</button></div>
     </form>
+  </div>
+  </div>
+  </div>
   </div>
 </div>

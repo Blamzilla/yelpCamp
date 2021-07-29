@@ -1,9 +1,15 @@
 <% layout('layouts/boilerplate')%>
 
-<div class="container col-6 col-md-4">
+<div class="container col-6">
   <%- include('../partial/flash')%>
-  <h1>Register</h1>
+ 
   <div class="row">
+
+  <div class="col-md-8 offset-md-2">
+      <div class="card shadow">
+        <img src="https://images.unsplash.com/photo-1516321165247-4aa89a48be28?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1094&q=80" alt="" class="card-img-top">
+        <div class="card-body">
+     <h5>Register</h5>
     <form action="/register" class="validated-form" method="POST" novalidate>
       <div class="mb-3">
         <label class="form-label" for="username">Username </label
@@ -41,7 +47,11 @@
         <div class="invalid-feedback">Please enter a username</div>
         <div class="valid-feedback">Looks good</div>
       </div>
-      <button class="btn btn-primary">Register</button>
+           <div class="d-grid">
+      <button class="btn btn-primary">Register</button></div>
     </form>
+  </div>
+  </div>
+  </div>
   </div>
 </div>
