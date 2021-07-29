@@ -38,7 +38,8 @@ module.exports.viewCampPage = async (req, res, next) => {
 
 
 module.exports.editCamp = async (req, res, next) => {
-    const { id } = req.params;
+   
+  const { id } = req.params;
 
     if (!ObjectID.isValid(id)) {
       return next();

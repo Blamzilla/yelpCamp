@@ -2,6 +2,7 @@ const Campground = require("./models/campground");
 const { campgroundSchema, reviewSchema } = require("./schemas.js");
 const ExpressError = require("./utils/ExpressError");
 const Review = require("./models/review");
+const catchAsync = require("./utils/catchAsync");
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
@@ -12,7 +13,7 @@ module.exports.isLoggedIn = (req, res, next) => {
   next();
 };
 
-module.exports.isAuthor = async (req, res, next) => {
+module.exports.isAuthor = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const findCampground = await Campground.findById(id);
   if (!findCampground.author.equals(req.user._id)) {
@@ -20,7 +21,7 @@ module.exports.isAuthor = async (req, res, next) => {
     return res.redirect(`/campgrounds/${id}`);
   }
   next();
-};
+});
 
 module.exports.isReviewAuthor = async (req, res, next) => {
   const { id, reviewId } = req.params;
