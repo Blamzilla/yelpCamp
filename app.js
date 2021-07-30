@@ -19,7 +19,7 @@ const LocalPassport = require("passport-local");
 const User = require("./models/user");
 const mongoSanitize = require('express-mongo-sanitize')
 const helmet = require('helmet')
-const dbUrl = "mongodb://localhost:27017/yelp-camp"
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp"
 const ObjectID = require("mongodb").ObjectID;
 const ExpressError = require("./utils/ExpressError");
 
@@ -55,10 +55,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/favicon.ico", (req, res) => res.status(204));
 app.use(mongoSanitize())
 
+const secret = process.env.SECRET || 'thisshouldbeabettersecret'
+
 const store = new MongoStore({
 mongoUrl: dbUrl,
 crypto: {
-  secret: 'thisshouldbeabettersecret',},
+  secret,},
 touchAfter: 24 * 3600
 })
 store.on("error", function(e){
@@ -67,7 +69,7 @@ store.on("error", function(e){
 const sessionConfig = {
   store,
   name: 'session',
-  secret: "thisshouldbeabettersecret",
+  secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -176,6 +178,8 @@ app.use((err, req, res, next) => {
   }
   res.status(statusCode).render("error", { err });
 });
-app.listen(3000, () => {
-  console.log("listening on 3000");
+
+const port = process.env.PORT || 3000
+app.listen(port, () => {
+  console.log(`listening on ${port}`);
 });
