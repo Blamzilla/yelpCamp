@@ -91,7 +91,8 @@ const scriptSrcUrls = [
     "https://cdnjs.cloudflare.com/",
     "https://cdn.jsdelivr.net",
     "https://maxcdn.bootstrapcdn.com/",
-    "https://code.jquery.com/"
+    "https://code.jquery.com/",
+    "https://unpkg.com/"
 ];
 const styleSrcUrls = [
     "https://kit-free.fontawesome.com/",
