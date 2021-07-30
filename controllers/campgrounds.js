@@ -89,8 +89,14 @@ module.exports.editCamp = async (req, res, next) => {
     if (!ObjectID.isValid(id)) {
       return next();
     }
+    const campgrounds = await Campground.findById(id)
     
+    
+    for(let filename of campgrounds.images){
+        await cloudinary.uploader.destroy(filename.filename)
+      }
     const findCamp = await Campground.findByIdAndDelete(id);
+    
     req.flash("success", "Successfully deleted campground");
     res.redirect(`/campgrounds`);
   }

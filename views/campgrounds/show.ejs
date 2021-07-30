@@ -12,6 +12,7 @@
 <!--Map section-->
 
 <!--Image section-->
+<% if(campground.images.length > 0){ %> 
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   
   <div class="carousel-inner">
@@ -35,6 +36,9 @@
   </button>
   <% } %> 
 </div>
+<% }else{ %>
+  <img src="https://res.cloudinary.com/blamzilla/image/upload/v1627524659/YelpCamp/optfg7etk7l7vn0pmrdp.jpg" alt="" class="d-block w-100">
+  <% } %> 
 <!--Image section-->
 
       <div class="card">
