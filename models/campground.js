@@ -3,7 +3,7 @@ const Reviews = require("./review");
 const Schema = mongoose.Schema;
 
 
-//https://res.cloudinary.com/blamzilla/image/upload/w_200/v1627523541/YelpCamp/hd1yt0trjh7dghzsjoad.jpg
+
 
 const ImageSchema = new Schema({
   
@@ -15,6 +15,8 @@ const ImageSchema = new Schema({
 ImageSchema.virtual('thumbnail').get(function(){
   return this.url.replace('/upload', '/upload/w_100')
 })
+
+const opts = {toJSON: {virtuals: true}}
 const CampgroundSchema = new Schema({
   title: String,
   images: [ImageSchema],
@@ -25,13 +27,29 @@ const CampgroundSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+  geometry: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      required: true
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+    }
+  },
   reviews: [
     {
       type: Schema.Types.ObjectId,
       ref: "Review",
     },
   ],
-});
+}, opts);
+
+CampgroundSchema.virtual('properties.popUpMarkup').get(function(){
+  return `<a href='/campgrounds/${this.id}'>${this.title}</a> <br> ${this.location}`
+})
+
 
 CampgroundSchema.post("findOneAndDelete", async function (doc) {
   
