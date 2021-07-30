@@ -91,7 +91,9 @@ const scriptSrcUrls = [
     "https://cdnjs.cloudflare.com/",
     "https://cdn.jsdelivr.net",
     "https://maxcdn.bootstrapcdn.com/",
-    "https://code.jquery.com/"
+    "https://code.jquery.com/",
+    "https://unpkg.com/",
+    "https://kit.fontawesome.com/4e45d5ec46.js"
 ];
 const styleSrcUrls = [
     "https://kit-free.fontawesome.com/",
@@ -101,7 +103,10 @@ const styleSrcUrls = [
     "https://fonts.googleapis.com/",
     "https://use.fontawesome.com/",
     "https://maxcdn.bootstrapcdn.com",
-    "https://cdn.jsdelivr.net"
+    "https://cdn.jsdelivr.net",
+    "https://ka-f.fontawesome.com",
+    
+    
 ];
 const connectSrcUrls = [
     "https://api.mapbox.com/",
@@ -110,7 +115,8 @@ const connectSrcUrls = [
     "https://events.mapbox.com/",
     
 ];
-const fontSrcUrls = [];
+const fontSrcUrls = ["https://kit.fontawesome.com",
+"https://ka-f.fontawesome.com",];
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
@@ -126,7 +132,8 @@ app.use(
                 "data:",
                 "https://res.cloudinary.com/blamzilla/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
                 "https://source.unsplash.com/",
-                "https://images.unsplash.com"
+                "https://images.unsplash.com",
+                "https://cdn2.iconfinder.com"
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
         },
@@ -152,7 +159,10 @@ app.get('/', (req, res)=>{
   res.render('home')
 })
 
-
+app.get("/contact", (req, res)=>
+{
+  res.render('contact')
+})
 //Campground Routes ewrgfeg
 app.use("/campgrounds", campgroundRoutes);
 

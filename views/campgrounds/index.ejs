@@ -1,8 +1,39 @@
 <% layout('./layouts/boilerplate')%> <%- include('../partial/flash')%>
 <div id="map" style="width: 100%; height: 300px"></div>
-<h1>All Campgrounds</h1>
+<h1>All Campgrounds</h1> <div class="d-inline">
+<nav aria-label="Page navigation example">
+<% if (pages > 0) { %>
+                <ul class="pagination text-center">
+                    <% if (current == 1) { %>
+                        <li class="disabled page-item"><span class="page-link">First</span></li>
+                    <% } else { %>
+                        <li class="page-item"><a class="page-link" href="/campgrounds/page/1">First</a></li>
+                    <% } %>
+                    <% let i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                    <% if (i !== 1) { %>
+                        <li class="disabled page-item"><a class="page-link">...</a></li>
+                    <% } %>
+                    <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                        <% if (i == current) { %>
+                            <li class="active page-item"><a class="page-link"><%= i %></a></li>
+                        <% } else { %>
+                            <li class="page-item"><a class="page-link" href="/campgrounds/page/<%= i %>"><%= i %></a></li>
+                        <% } %>
+                        <% if (i == Number(current) + 4 && i < pages) { %>
+                            <li class="disabled page-item"><a class="page-link">...</a></li>
+                        <% } %>
+                    <% } %>
+                    <% if (current == pages) { %>
+                        <li class="disabled page-item"><a class="page-link">Last</a></li>
+                    <% } else { %>
+                        <li class="page-item"><a class="page-link" href="/campgrounds/page/<%= pages %>">Last</a></li>
+                    <% } %>
+                </ul>
+            <% } %>
+            </nav>
+</div>
 <% for(let camps of campgrounds){%>
-
+<div class="container">
 <div class="card mb-3">
   <div class="row">
     <div class="col-md-4">
@@ -20,8 +51,10 @@
     </div>
   </div>
 </div>
+</div>
 
 <%}%>
+
 <script>
 const mapToken = '<%-process.env.MAPBOX_TOKEN%>'
 const campgrounds = {features:<%- JSON.stringify(campgrounds) %>}
