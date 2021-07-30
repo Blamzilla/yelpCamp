@@ -9,6 +9,7 @@ module.exports.index = async (req, res, next) => {
   const perPage = 9;
     const page = req.params.page || 1
   const campgrounds = await Campground.find({}).skip((perPage * page) - perPage)
+        .sort({_id: "desc"})
         .limit(perPage)
         .exec(function(err, campgrounds){
             Campground.count().exec(function(err, count){
@@ -33,13 +34,14 @@ const geoData = await geoCoder.forwardGeocode({
   query: req.body.campground.location,
   limit:1
 }).send()
-console.log(geoData.body.features[0].geometry)
+
   const campground = new Campground(req.body.campground);
   campground.geometry = geoData.body.features[0].geometry
   campground.images = req.files.map(f =>({url: f.path, filename: f.filename}))
   campground.author = req.user._id;
+  campground.date = Math.floor(Date.now() /1000)
   await campground.save();
-  console.log(campground)
+
   req.flash("success", "Successfully made a new campground");
   res.redirect(`/campgrounds/${campground._id}`);
 };

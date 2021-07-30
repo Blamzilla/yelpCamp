@@ -15,6 +15,7 @@ router.get('/page/:page', (req, res, next)=>{
 
     Campground
         .find({})
+        .sort({_id: "desc"})
         .skip((perPage * page) - perPage)
         .limit(perPage)
         .exec(function(err, campgrounds){
