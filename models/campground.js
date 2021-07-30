@@ -16,8 +16,12 @@ ImageSchema.virtual('thumbnail').get(function(){
   return this.url.replace('/upload', '/upload/w_100')
 })
 
-const opts = {toJSON: {virtuals: true}}
+const opts = {toJSON: {virtuals: true}, timestamps: true}
 const CampgroundSchema = new Schema({
+ date: {
+   type: Number,
+   
+ },
   title: String,
   images: [ImageSchema],
   price: Number,

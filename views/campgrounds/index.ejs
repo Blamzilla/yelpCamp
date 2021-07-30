@@ -45,6 +45,9 @@
         <p class="card-text"><%=camps.description %></p>
         <p class="card-text">
           <small class="text-muted"><%= camps.location %> </small>
+        </p><p class="card-text">
+          <small class="text-muted">Created:  <% if(camps.date){%>
+            <%const date = new Date(camps.date * 1000)%><%=date.toLocaleString()%><% } else{ %> date unavailable <% } %>  </small>
         </p>
         <a href="/campgrounds/<%=camps.id%>" class="btn btn-primary">View</a>
       </div>
