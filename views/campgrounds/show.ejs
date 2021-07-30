@@ -48,12 +48,17 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Price $<%= campground.price %>/day</li>
           <li class="list-group-item text-muted"><%=campground.location %></li>
+          
+
           <li class="list-group-item">
             Submitted by: <%=campground.author.username %>
           </li>
+          <li class="list-group-item text-muted">Created: <% if(campground.date){%>
+            <%const date = new Date(campground.date * 1000)%><%=date.toLocaleString()%><% } else{ %> date unavailable <% } %></li>
         </ul>
         <% if( currentUser && campground.author.equals(currentUser)) {%>
-        <div class="card-body">
+        
+          <div class="card-body">
           <div class=""></div>
           <a
             href="/campgrounds/<%=campground._id%>/edit"
