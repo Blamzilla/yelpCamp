@@ -23,7 +23,7 @@ const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp"
 const ObjectID = require("mongodb").ObjectID;
 const ExpressError = require("./utils/ExpressError");
 
-
+const apiRoutes = require("./routes/api")
 const userRoutes = require("./routes/users");
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
@@ -163,6 +163,8 @@ app.get("/contact", (req, res)=>
 {
   res.render('contact')
 })
+app.use('/api', apiRoutes )
+
 //Campground Routes ewrgfeg
 app.use("/campgrounds", campgroundRoutes);
 
