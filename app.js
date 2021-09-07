@@ -1,5 +1,5 @@
-if(process.env.NODE_ENV!=='production'){
-  require('dotenv').config()
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
 }
 
 //includes section
@@ -12,18 +12,18 @@ const methodOverride = require("method-override");
 const Campground = require("./models/campground");
 const app = express();
 const session = require("express-session");
-const MongoStore = require("connect-mongo")
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalPassport = require("passport-local");
 const User = require("./models/user");
-const mongoSanitize = require('express-mongo-sanitize')
-const helmet = require('helmet')
-const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp"
+const mongoSanitize = require("express-mongo-sanitize");
+const helmet = require("helmet");
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp";
 const ObjectID = require("mongodb").ObjectID;
 const ExpressError = require("./utils/ExpressError");
 
-const apiRoutes = require("./routes/api")
+const apiRoutes = require("./routes/api");
 const userRoutes = require("./routes/users");
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
@@ -53,22 +53,23 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.get("/favicon.ico", (req, res) => res.status(204));
-app.use(mongoSanitize())
+app.use(mongoSanitize());
 
-const secret = process.env.SECRET || 'thisshouldbeabettersecret'
+const secret = process.env.SECRET;
 
 const store = new MongoStore({
-mongoUrl: dbUrl,
-crypto: {
-  secret,},
-touchAfter: 24 * 3600
-})
-store.on("error", function(e){
-  console.log("Session Store Error", e)
-})
+  mongoUrl: dbUrl,
+  crypto: {
+    secret,
+  },
+  touchAfter: 24 * 3600,
+});
+store.on("error", function (e) {
+  console.log("Session Store Error", e);
+});
 const sessionConfig = {
   store,
-  name: 'session',
+  name: "session",
   secret,
   resave: false,
   saveUninitialized: true,
@@ -81,63 +82,62 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig));
 app.use(flash());
-app.use(helmet())
+app.use(helmet());
 
 const scriptSrcUrls = [
-    "https://stackpath.bootstrapcdn.com/",
-    "https://api.tiles.mapbox.com/",
-    "https://api.mapbox.com/",
-    "https://kit.fontawesome.com/",
-    "https://cdnjs.cloudflare.com/",
-    "https://cdn.jsdelivr.net",
-    "https://maxcdn.bootstrapcdn.com/",
-    "https://code.jquery.com/",
-    "https://unpkg.com/",
-    "https://kit.fontawesome.com/4e45d5ec46.js"
+  "https://stackpath.bootstrapcdn.com/",
+  "https://api.tiles.mapbox.com/",
+  "https://api.mapbox.com/",
+  "https://kit.fontawesome.com/",
+  "https://cdnjs.cloudflare.com/",
+  "https://cdn.jsdelivr.net",
+  "https://maxcdn.bootstrapcdn.com/",
+  "https://code.jquery.com/",
+  "https://unpkg.com/",
+  "https://kit.fontawesome.com/4e45d5ec46.js",
 ];
 const styleSrcUrls = [
-    "https://kit-free.fontawesome.com/",
-    "https://stackpath.bootstrapcdn.com/",
-    "https://api.mapbox.com/",
-    "https://api.tiles.mapbox.com/",
-    "https://fonts.googleapis.com/",
-    "https://use.fontawesome.com/",
-    "https://maxcdn.bootstrapcdn.com",
-    "https://cdn.jsdelivr.net",
-    "https://ka-f.fontawesome.com",
-    
-    
+  "https://kit-free.fontawesome.com/",
+  "https://stackpath.bootstrapcdn.com/",
+  "https://api.mapbox.com/",
+  "https://api.tiles.mapbox.com/",
+  "https://fonts.googleapis.com/",
+  "https://use.fontawesome.com/",
+  "https://maxcdn.bootstrapcdn.com",
+  "https://cdn.jsdelivr.net",
+  "https://ka-f.fontawesome.com",
 ];
 const connectSrcUrls = [
-    "https://api.mapbox.com/",
-    "https://a.tiles.mapbox.com/",
-    "https://b.tiles.mapbox.com/",
-    "https://events.mapbox.com/",
-    
+  "https://api.mapbox.com/",
+  "https://a.tiles.mapbox.com/",
+  "https://b.tiles.mapbox.com/",
+  "https://events.mapbox.com/",
 ];
-const fontSrcUrls = ["https://kit.fontawesome.com",
-"https://ka-f.fontawesome.com",];
+const fontSrcUrls = [
+  "https://kit.fontawesome.com",
+  "https://ka-f.fontawesome.com",
+];
 app.use(
-    helmet.contentSecurityPolicy({
-        directives: {
-            defaultSrc: [],
-            connectSrc: ["'self'", ...connectSrcUrls],
-            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-            workerSrc: ["'self'", "blob:"],
-            objectSrc: [],
-            imgSrc: [
-                "'self'",
-                "blob:",
-                "data:",
-                "https://res.cloudinary.com/blamzilla/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
-                "https://source.unsplash.com/",
-                "https://images.unsplash.com",
-                "https://cdn2.iconfinder.com"
-            ],
-            fontSrc: ["'self'", ...fontSrcUrls],
-        },
-    })
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: [],
+      connectSrc: ["'self'", ...connectSrcUrls],
+      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      workerSrc: ["'self'", "blob:"],
+      objectSrc: [],
+      imgSrc: [
+        "'self'",
+        "blob:",
+        "data:",
+        "https://res.cloudinary.com/blamzilla/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
+        "https://source.unsplash.com/",
+        "https://images.unsplash.com",
+        "https://cdn2.iconfinder.com",
+      ],
+      fontSrc: ["'self'", ...fontSrcUrls],
+    },
+  })
 );
 
 app.use(passport.initialize());
@@ -154,16 +154,14 @@ app.use((req, res, next) => {
 
   next();
 });
-app.get('/', (req, res)=>{
-  
-  res.render('home')
-})
+app.get("/", (req, res) => {
+  res.render("home");
+});
 
-app.get("/contact", (req, res)=>
-{
-  res.render('contact')
-})
-app.use('/api', apiRoutes )
+app.get("/contact", (req, res) => {
+  res.render("contact");
+});
+app.use("/api", apiRoutes);
 
 //Campground Routes ewrgfeg
 app.use("/campgrounds", campgroundRoutes);
@@ -179,9 +177,8 @@ app.get("/", (req, res) => {
 });
 
 app.all("*", (req, res, next) => {
-  req.flash('error', "Page not found")
- return res.redirect('/campgrounds')
-  
+  req.flash("error", "Page not found");
+  return res.redirect("/campgrounds");
 });
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
@@ -191,7 +188,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err });
 });
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`listening on ${port}`);
 });
