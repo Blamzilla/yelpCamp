@@ -29,6 +29,7 @@ const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 
 const { campgroundSchema, reviewSchema } = require("./schemas.js");
+const { index } = require("./controllers/campgrounds");
 
 //DB connection section
 //testing output "mongodb://localhost:27017/yelp-camp"
@@ -95,6 +96,7 @@ const scriptSrcUrls = [
   "https://code.jquery.com/",
   "https://unpkg.com/",
   "https://kit.fontawesome.com/4e45d5ec46.js",
+  "https://i.simmer.io/",
 ];
 const styleSrcUrls = [
   "https://kit-free.fontawesome.com/",
@@ -112,15 +114,18 @@ const connectSrcUrls = [
   "https://a.tiles.mapbox.com/",
   "https://b.tiles.mapbox.com/",
   "https://events.mapbox.com/",
+  "https://i.simmer.io/",
 ];
 const fontSrcUrls = [
   "https://kit.fontawesome.com",
   "https://ka-f.fontawesome.com",
 ];
+
+const defaultSrc = ["https://i.simmer.io/"];
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: [],
+      defaultSrc: [...defaultSrc],
       connectSrc: ["'self'", ...connectSrcUrls],
       scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
       styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
@@ -162,7 +167,9 @@ app.get("/contact", (req, res) => {
   res.render("contact");
 });
 app.use("/api", apiRoutes);
-
+app.get("/games", (req, res) => {
+  res.render("games");
+});
 //Campground Routes ewrgfeg
 app.use("/campgrounds", campgroundRoutes);
 
