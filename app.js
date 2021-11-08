@@ -30,7 +30,7 @@ const reviewRoutes = require("./routes/reviews");
 
 const { campgroundSchema, reviewSchema } = require("./schemas.js");
 const { index } = require("./controllers/campgrounds");
-
+const thisIsATest = "test";
 //DB connection section
 //testing output "mongodb://localhost:27017/yelp-camp"
 mongoose.connect(dbUrl, {
