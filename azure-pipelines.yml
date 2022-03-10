@@ -68,7 +68,7 @@ stages:
         deploy:
           steps:
           - task: AzureWebApp@1
-            displayName: 'Azure Web App Deploy: sampler1'
+            displayName: 'Azure Web App Deploy: testdeployment11'
             inputs:
               azureSubscription: $(azureSubscription)
               appType: webAppLinux
