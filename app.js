@@ -19,8 +19,7 @@ const LocalPassport = require("passport-local");
 const User = require("./models/user");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
-const dbUrl =
-  "mongodb://cosmo-mscl-01:2ptFrk6TJq0Z4mIbgj0Bacjj1caq0dT0aNSRWg6tOeL14TAzxZfii5WTMkiXugevGwbVnrb60BvKACDbULOxbg==@cosmo-mscl-01.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@cosmo-mscl-01@";
+const dbUrl = "";
 const ObjectID = require("mongodb").ObjectID;
 const ExpressError = require("./utils/ExpressError");
 
