@@ -19,7 +19,8 @@ const LocalPassport = require("passport-local");
 const User = require("./models/user");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
-const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp";
+const dbUrl =
+  "mongodb://cosmo-mscl-01:2ptFrk6TJq0Z4mIbgj0Bacjj1caq0dT0aNSRWg6tOeL14TAzxZfii5WTMkiXugevGwbVnrb60BvKACDbULOxbg==@cosmo-mscl-01.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@cosmo-mscl-01@";
 const ObjectID = require("mongodb").ObjectID;
 const ExpressError = require("./utils/ExpressError");
 
@@ -87,8 +88,8 @@ app.use(helmet());
 
 const scriptSrcUrls = [
   "https://stackpath.bootstrapcdn.com/",
-  "https://api.tiles.mapbox.com/",
-  "https://api.mapbox.com/",
+  // "https://api.tiles.mapbox.com/",
+  // "https://api.mapbox.com/",
   "https://kit.fontawesome.com/",
   "https://cdnjs.cloudflare.com/",
   "https://cdn.jsdelivr.net",
@@ -101,8 +102,8 @@ const scriptSrcUrls = [
 const styleSrcUrls = [
   "https://kit-free.fontawesome.com/",
   "https://stackpath.bootstrapcdn.com/",
-  "https://api.mapbox.com/",
-  "https://api.tiles.mapbox.com/",
+  // "https://api.mapbox.com/",
+  // "https://api.tiles.mapbox.com/",
   "https://fonts.googleapis.com/",
   "https://use.fontawesome.com/",
   "https://maxcdn.bootstrapcdn.com",
@@ -110,10 +111,10 @@ const styleSrcUrls = [
   "https://ka-f.fontawesome.com",
 ];
 const connectSrcUrls = [
-  "https://api.mapbox.com/",
-  "https://a.tiles.mapbox.com/",
-  "https://b.tiles.mapbox.com/",
-  "https://events.mapbox.com/",
+  // "https://api.mapbox.com/",
+  //   "https://a.tiles.mapbox.com/",
+  // "https://b.tiles.mapbox.com/",
+  // "https://events.mapbox.com/",
   "https://i.simmer.io/",
 ];
 const fontSrcUrls = [
