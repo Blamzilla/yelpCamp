@@ -3,7 +3,9 @@ const User = require("../models/user");
 module.exports.renderRegister = (req, res) => {
   res.render("users/register");
 };
-
+module.exports.renderDashboard = (req, res) => {
+  res.render("users/dashboard/index");
+};
 module.exports.register = async (req, res, next) => {
   try {
     const { email, username, password } = req.body;
@@ -14,8 +16,8 @@ module.exports.register = async (req, res, next) => {
         return next(err);
       }
     });
-    req.flash("success", "Welcome to YelpCamp!");
-    res.redirect("/campgrounds");
+    req.flash("success", "Welcome to MSCL Solutions Inc!");
+    res.redirect("dashboard");
   } catch (e) {
     req.flash("error", e.message);
     res.redirect("register");
@@ -28,7 +30,7 @@ module.exports.loginRender = (req, res) => {
 
 module.exports.login = (req, res) => {
   req.flash("success", "Welcome Back");
-  const redirectUrl = req.session.returnTo || "/campgrounds";
+  const redirectUrl = "dashboard";
   delete req.session.returnTo;
   res.redirect(redirectUrl);
 };

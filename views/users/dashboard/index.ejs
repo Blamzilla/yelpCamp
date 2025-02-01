@@ -1,0 +1,46 @@
+<% layout('./layouts/boilerplate')%> <%- include('../../partial/flash')%>
+
+<div style="padding: 20px">
+  <h2>Hi John, below is your water consumption</h2>
+  <p>Amount Due: $<%= 100 %></p>
+  <p>Due Date: <%= "12/12/12" %></p>
+
+  <form action="/payment" method="GET">
+    <button type="submit">Pay Now</button>
+  </form>
+
+  <div id="chart" style="width: 80%; height: 300px; margin-top: 20px"></div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip } = Recharts;
+        const { createElement } = React;
+        const { render } = ReactDOM;
+
+        const data = <%- JSON.stringify([
+
+  { month: "Jan", usage: 100, trend: 90 },
+
+  { month: "Feb", usage: 120, trend: 100 },
+
+  { month: "Mar", usage: 110, trend: 105 },
+
+  { month: "Apr", usage: 140, trend: 120 },
+
+  ]) %>;
+
+        function ChartComponent() {
+            return createElement(ResponsiveContainer, { width: "100%", height: 300 },
+                createElement(BarChart, { data: data },
+                    createElement(XAxis, { dataKey: "month" }),
+                    createElement(YAxis, {}),
+                    createElement(Tooltip, {}),
+                    createElement(Bar, { dataKey: "usage", fill: "#8884d8" })
+                )
+            );
+        }
+
+        render(createElement(ChartComponent), document.getElementById("chart"));
+    });
+</script>

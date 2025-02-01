@@ -19,7 +19,7 @@ const LocalPassport = require("passport-local");
 const User = require("./models/user");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
-const dbUrl = "";
+const dbUrl = process.env.DB_URL;
 const ObjectID = require("mongodb").ObjectID;
 const ExpressError = require("./utils/ExpressError");
 
@@ -185,7 +185,7 @@ app.get("/", (req, res) => {
 
 app.all("*", (req, res, next) => {
   req.flash("error", "Page not found");
-  return res.redirect("/campgrounds");
+  return res.redirect("/dashboard");
 });
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
